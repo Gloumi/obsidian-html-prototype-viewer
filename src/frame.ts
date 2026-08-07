@@ -1,8 +1,8 @@
 import { App, TFile } from "obsidian";
 
 /**
- * Permissions accordées au prototype dans tous les cas. `allow-same-origin`
- * s'y ajoute sauf si l'isolation stricte est demandée (cf. settings).
+ * Permissions granted to the prototype in every case. `allow-same-origin` is
+ * appended on top unless strict isolation is requested (see settings).
  */
 const SANDBOX_FLAGS = [
 	"allow-scripts",
@@ -20,10 +20,10 @@ export function sandboxAttr(strictIsolation: boolean): string {
 }
 
 /**
- * URL interne d'Obsidian pour un fichier du vault : `app://<hash>/<chemin>?<mtime>`
- * sur desktop, `capacitor://` sur mobile. Le hash est régénéré à chaque
- * démarrage — c'est pour ça qu'un `app://local/...` écrit à la main dans une note
- * ne fonctionne pas, alors que celui-ci fonctionne partout.
+ * Obsidian's internal URL for a vault file: `app://<hash>/<path>?<mtime>` on
+ * desktop, `capacitor://` on mobile. The hash is regenerated on every startup —
+ * which is why an `app://local/...` path hand-written into a note does not
+ * resolve, while this one works everywhere.
  */
 export function resourceUrl(app: App, file: TFile): string {
 	return app.vault.getResourcePath(file);
@@ -31,7 +31,7 @@ export function resourceUrl(app: App, file: TFile): string {
 
 export interface FrameOptions {
 	strictIsolation: boolean;
-	/** Ajoute un paramètre au src pour contourner le cache lors d'un rechargement manuel. */
+	/** Appends a parameter to the src to bypass the cache on a manual reload. */
 	cacheBust?: boolean;
 }
 
@@ -51,9 +51,9 @@ export function createFrame(app: App, file: TFile, opts: FrameOptions): HTMLIFra
 }
 
 /**
- * `openWithDefaultApp` ne fait pas partie de `obsidian.d.ts`. On ne l'appelle
- * donc jamais à l'aveugle : les points d'entrée qui s'en servent sont masqués
- * quand elle est absente, plutôt que d'échouer en silence.
+ * `openWithDefaultApp` is not part of `obsidian.d.ts`, so it is never called
+ * blindly: the entry points relying on it are hidden when it is missing, rather
+ * than failing silently.
  */
 type MaybeOpener = { openWithDefaultApp?: (path: string) => unknown };
 
@@ -61,7 +61,7 @@ export function canOpenExternally(app: App): boolean {
 	return typeof (app as unknown as MaybeOpener).openWithDefaultApp === "function";
 }
 
-/** Ouvre le fichier dans l'application par défaut du système (navigateur). */
+/** Opens the file in the system's default application (the browser). */
 export function openExternally(app: App, file: TFile): void {
 	const opener = (app as unknown as MaybeOpener).openWithDefaultApp;
 	if (typeof opener === "function") opener.call(app, file.path);

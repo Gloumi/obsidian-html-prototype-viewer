@@ -47,8 +47,8 @@ export class HtmlPrototypeView extends FileView {
 			});
 		}
 
-		// Enregistré une seule fois pour la durée de vie de la vue : `this.file`
-		// change au fil des navigations, la comparaison se fait donc à la volée.
+		// Registered once for the lifetime of the view: `this.file` changes as the
+		// user navigates, so the comparison is made at call time instead.
 		this.registerEvent(
 			this.app.vault.on("modify", (changed: TAbstractFile) => {
 				if (!this.plugin.settings.autoReload) return;

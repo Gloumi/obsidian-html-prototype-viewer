@@ -1,8 +1,8 @@
 import { moment } from "obsidian";
 
 /**
- * Anglais = source de vérité : toute clé absente d'une autre langue y retombe.
- * La langue suit celle d'Obsidian, exposée via la locale de moment.
+ * English is the source of truth: any key missing from another language falls
+ * back to it. The language follows Obsidian's own, exposed as moment's locale.
  */
 const EN = {
 	"view.title": "HTML prototype",
@@ -84,7 +84,7 @@ function currentLanguage(): string {
 	}
 }
 
-/** Traduit `key`, en substituant `{0}`, `{1}`… par `params`. */
+/** Translates `key`, substituting `{0}`, `{1}`… with `params`. */
 export function t(key: TranslationKey, ...params: string[]): string {
 	const localized = currentLanguage().startsWith("fr") ? FR[key] : undefined;
 	const template = localized ?? EN[key];

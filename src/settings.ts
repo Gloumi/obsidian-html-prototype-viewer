@@ -7,7 +7,7 @@ export type ViewportId = "full" | "desktop" | "tablet" | "mobile";
 export interface Viewport {
 	id: ViewportId;
 	labelKey: TranslationKey;
-	/** Largeur imposée à l'iframe, en px. `null` = pleine largeur du panneau. */
+	/** Width forced onto the iframe, in px. `null` means the full panel width. */
 	width: number | null;
 }
 
@@ -23,17 +23,17 @@ export function viewportById(id: ViewportId): Viewport {
 }
 
 export interface HtmlPrototypeSettings {
-	/** Largeur de rendu appliquée à l'ouverture d'un prototype. */
+	/** Render width applied when a prototype is opened. */
 	viewport: ViewportId;
-	/** Recharge l'iframe quand le fichier change sur le disque. */
+	/** Reloads the iframe whenever the file changes on disk. */
 	autoReload: boolean;
 	/**
-	 * Retire `allow-same-origin` du sandbox. Le prototype tourne alors dans une
-	 * origine opaque : aucun accès à l'API Obsidian, mais plus de localStorage
-	 * ni de fetch vers les fichiers voisins.
+	 * Drops `allow-same-origin` from the sandbox. The prototype then runs in an
+	 * opaque origin: no access to the Obsidian API, but also no localStorage and
+	 * no fetching of neighbouring files.
 	 */
 	strictIsolation: boolean;
-	/** Hauteur par défaut, en px, des blocs `html-preview` dans les notes. */
+	/** Default height, in px, of `html-preview` blocks inside notes. */
 	embedHeight: number;
 }
 

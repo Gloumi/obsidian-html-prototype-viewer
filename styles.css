@@ -1,4 +1,4 @@
-/* --- Cadre de rendu -------------------------------------------------- */
+/* --- Render frame ---------------------------------------------------- */
 
 .hpv-frame {
 	width: var(--hpv-frame-width, 100%);
@@ -7,7 +7,7 @@
 	background-color: #fff;
 }
 
-/* --- Vue plein onglet ------------------------------------------------ */
+/* --- Full tab view --------------------------------------------------- */
 
 .hpv-view {
 	padding: 0;
@@ -23,7 +23,7 @@
 	background-color: var(--background-secondary);
 }
 
-/* Largeur imposée (desktop / tablette / mobile) : on matérialise le cadre. */
+/* Forced width (desktop / tablet / mobile): make the device frame visible. */
 .hpv-stage.is-constrained .hpv-frame {
 	flex: 0 0 auto;
 	margin: var(--size-4-4) 0;
@@ -32,7 +32,7 @@
 	box-shadow: var(--shadow-s);
 }
 
-/* --- Aperçu embarqué dans une note ----------------------------------- */
+/* --- Preview embedded in a note -------------------------------------- */
 
 .hpv-embed {
 	border: 1px solid var(--background-modifier-border);

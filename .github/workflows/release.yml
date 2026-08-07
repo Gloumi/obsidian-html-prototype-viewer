@@ -1,7 +1,7 @@
 name: Release Obsidian plugin
 
-# Pousser un tag égal à la version du manifest (ex. `1.0.0`, sans préfixe `v`)
-# construit le plugin et publie la release avec les assets attendus par Obsidian.
+# Pushing a tag equal to the manifest version (e.g. `1.0.0`, no `v` prefix)
+# builds the plugin and publishes the release with the assets Obsidian expects.
 on:
   push:
     tags:

@@ -12,9 +12,9 @@ interface EmbedSpec {
 }
 
 /**
- * Accepte, dans n'importe quel ordre :
- *   - une ligne nue contenant le chemin ou un lien `[[…]]`
- *   - `path: <chemin>`, `height: <px>`, `width: <px>`
+ * Accepts, in any order:
+ *   - a bare line holding the path or a `[[link]]`
+ *   - `path: <path>`, `height: <px>`, `width: <px>`
  */
 function parseSpec(source: string): EmbedSpec {
 	const spec: EmbedSpec = { target: "", height: null, width: null };
