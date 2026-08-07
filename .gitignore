@@ -1,5 +1,6 @@
 node_modules/
 main.js
 *.js.map
+.vault-path
 data.json
 .DS_Store

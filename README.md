@@ -84,6 +84,17 @@ npm run dev     # watch build
 npm run build   # type-check, then production bundle
 ```
 
+To deploy the build into a vault for testing, point the repo at it — either with the
+`OBSIDIAN_VAULT` environment variable, or by writing the vault's absolute path into a
+git-ignored `.vault-path` file at the repo root — then:
+
+```bash
+npm run build && npm run install-local
+```
+
+This copies `main.js`, `manifest.json` and `styles.css` into
+`<vault>/.obsidian/plugins/html-prototype-viewer/`. Reload Obsidian afterwards.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
