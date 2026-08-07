@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"module": "ESNext",
+		"target": "ES2020",
+		"moduleResolution": "node",
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"lib": ["DOM", "ES2021"]
+	},
+	"include": ["src/**/*.ts"]
+}
