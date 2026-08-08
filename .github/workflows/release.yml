@@ -47,11 +47,19 @@ jobs:
             manifest.json
             styles.css
 
-      - name: Create release
+      # Idempotent: re-pushing an existing tag refreshes its assets instead of
+      # failing on "a release with the same tag name already exists".
+      - name: Create or update release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" \
-            --title "${GITHUB_REF_NAME}" \
-            --generate-notes \
-            main.js manifest.json styles.css
+          if gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+            echo "Release ${GITHUB_REF_NAME} exists — refreshing its assets."
+            gh release upload "${GITHUB_REF_NAME}" \
+              main.js manifest.json styles.css --clobber
+          else
+            gh release create "${GITHUB_REF_NAME}" \
+              --title "${GITHUB_REF_NAME}" \
+              --generate-notes \
+              main.js manifest.json styles.css
+          fi
