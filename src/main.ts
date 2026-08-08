@@ -69,7 +69,10 @@ export default class HtmlPrototypeViewerPlugin extends Plugin {
 	}
 
 	async loadSettings(): Promise<void> {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+		// `loadData()` is typed `any`; narrow it before merging so the spread
+		// cannot silently widen the settings type.
+		const stored = (await this.loadData()) as Partial<HtmlPrototypeSettings> | null;
+		this.settings = { ...DEFAULT_SETTINGS, ...(stored ?? {}) };
 	}
 
 	async saveSettings(): Promise<void> {

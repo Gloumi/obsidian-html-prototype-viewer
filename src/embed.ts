@@ -89,7 +89,7 @@ export function registerEmbed(plugin: HtmlPrototypeViewerPlugin): void {
 				text: t("embed.button.tab"),
 			});
 			tabBtn.addEventListener("click", () => {
-				plugin.app.workspace.getLeaf("tab").openFile(dest);
+				void plugin.app.workspace.getLeaf("tab").openFile(dest);
 			});
 
 			const stage = wrapper.createDiv({ cls: "hpv-embed-stage" });

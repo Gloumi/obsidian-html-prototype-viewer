@@ -36,8 +36,7 @@ export interface FrameOptions {
 }
 
 export function createFrame(app: App, file: TFile, opts: FrameOptions): HTMLIFrameElement {
-	const frame = document.createElement("iframe");
-	frame.addClass("hpv-frame");
+	const frame = createEl("iframe", { cls: "hpv-frame" });
 	frame.setAttribute("sandbox", sandboxAttr(opts.strictIsolation));
 	frame.setAttribute("referrerpolicy", "no-referrer");
 	frame.setAttribute("title", file.basename);

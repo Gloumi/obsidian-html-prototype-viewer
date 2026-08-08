@@ -1,7 +1,7 @@
 {
 	"id": "html-prototype-viewer",
 	"name": "HTML Prototype Viewer",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"minAppVersion": "1.4.0",
 	"description": "Preview local HTML files in an isolated iframe, with device widths and live reload, and embed them in your notes.",
 	"author": "Renan Gautier",

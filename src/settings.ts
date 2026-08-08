@@ -1,4 +1,4 @@
-import { App, PluginSettingTab, Setting } from "obsidian";
+import { App, PluginSettingTab, Setting, SettingDefinitionItem } from "obsidian";
 import type HtmlPrototypeViewerPlugin from "./main";
 import { TranslationKey, t } from "./i18n";
 
@@ -44,6 +44,10 @@ export const DEFAULT_SETTINGS: HtmlPrototypeSettings = {
 	embedHeight: 600,
 };
 
+function viewportOptions(): Record<string, string> {
+	return Object.fromEntries(VIEWPORTS.map((vp) => [vp.id, t(vp.labelKey)]));
+}
+
 export class HtmlPrototypeSettingTab extends PluginSettingTab {
 	private plugin: HtmlPrototypeViewerPlugin;
 
@@ -52,6 +56,58 @@ export class HtmlPrototypeSettingTab extends PluginSettingTab {
 		this.plugin = plugin;
 	}
 
+	/**
+	 * Declarative settings (Obsidian 1.13+). Beyond rendering, this is what makes
+	 * the settings reachable from the global settings search. `getControlValue` /
+	 * `setControlValue` default to reading and persisting `plugin.settings`, whose
+	 * keys match the `key` fields below.
+	 */
+	getSettingDefinitions(): SettingDefinitionItem[] {
+		return [
+			{
+				name: t("setting.viewport.name"),
+				desc: t("setting.viewport.desc"),
+				control: {
+					type: "dropdown",
+					key: "viewport",
+					options: viewportOptions(),
+					defaultValue: DEFAULT_SETTINGS.viewport,
+				},
+			},
+			{
+				name: t("setting.autoReload.name"),
+				desc: t("setting.autoReload.desc"),
+				control: {
+					type: "toggle",
+					key: "autoReload",
+					defaultValue: DEFAULT_SETTINGS.autoReload,
+				},
+			},
+			{
+				name: t("setting.embedHeight.name"),
+				desc: t("setting.embedHeight.desc"),
+				control: {
+					type: "number",
+					key: "embedHeight",
+					defaultValue: DEFAULT_SETTINGS.embedHeight,
+					placeholder: String(DEFAULT_SETTINGS.embedHeight),
+					min: 1,
+					step: 1,
+				},
+			},
+			{
+				name: t("setting.strictIsolation.name"),
+				desc: t("setting.strictIsolation.desc"),
+				control: {
+					type: "toggle",
+					key: "strictIsolation",
+					defaultValue: DEFAULT_SETTINGS.strictIsolation,
+				},
+			},
+		];
+	}
+
+	/** Fallback rendering for Obsidian versions older than 1.13. */
 	display(): void {
 		const { containerEl } = this;
 		containerEl.empty();
